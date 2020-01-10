@@ -57,7 +57,7 @@ df_MIA = df_tip[df_tip['business_id'] == business_id] # get all tips for McCarra
 dates = df_MIA['date'].dt.hour.to_numpy() # get the hour of each date of the tips for MIA
 values, counts = np.unique(dates, return_counts=True) # find how many tips were left at each hour
 
-print(f'Q5:{values[np.argmax(counts)]}') # print the hour that had the max # of tips
+print(f'Q5:{values[np.argmin(counts)]}') # print the hour that had the max # of tips
 #            #
 ##### Q5 #####
 

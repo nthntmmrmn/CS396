@@ -27,3 +27,11 @@ threshold = tips.mean() + 6*tips.std()
 print(f'Q3:{len(tips[tips >= threshold])}')
 ##### Q3 #####
 
+df_business = pd.read_json(path+'/business.json', lines=True)
+business_id = df_tip['business_id'].mode().get(0)
+name = df_business[df_business['business_id'] == business_id]['name'].values[0]
+
+##### Q4 #####
+print(f'Q4:{name}')
+##### Q3 #####
+

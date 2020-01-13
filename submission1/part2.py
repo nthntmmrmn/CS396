@@ -39,7 +39,10 @@ def findClosest(word, cities):
         return 'Phoenix'
 
     # if extra words added to city name, remove them and return just the city name
-    # eg, "Westworld Scottsdale", "Metro Phoenix", "Chandler-Gilbert", etc.
+    # eg, "Westworld Scottsdale"->"Scottsdale", 
+    #     "Metro Phoenix"->"Phoenix", 
+    #     "Chandler-Gilbert"->"Chandler", 
+    #     etc.
     # cuts down from 77 to 61 unique cities
     for city in cities:
         if city in word:

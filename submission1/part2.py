@@ -2,9 +2,13 @@ import json, sys, os, re
 import numpy as np
 import pandas as pd
 import string as str
+# for verification purposes
+# import googlemaps
+# gmaps = googlemaps.Client(key='[redated]')
 
 ### TODO
-# business names -> city (eg, The Promenade)
+# business names -> city (eg, The Promenade->Scottsdale)
+# find out where empty city name is?
 
 # get path and run check as global var
 path = sys.argv[1]
@@ -34,16 +38,20 @@ def findClosest(word, cities):
     word = removeAbbr(word)
     word = fixCapitalization(word)
 
-    # specific check for '' and 'Phx'
-    if len(word) < 1 or word == 'Phx':
+    # specific check for '' and 'Phx' and 'The Promenade'
+    if len(word) < 1: 
+        return 'Mesa'
+    if word == 'Phx':
         return 'Phoenix'
+    if word == 'The Promenade':
+        return 'Scottsdale'
 
     # if extra words added to city name, remove them and return just the city name
     # eg, "Westworld Scottsdale"->"Scottsdale", 
     #     "Metro Phoenix"->"Phoenix", 
     #     "Chandler-Gilbert"->"Chandler", 
     #     etc.
-    # cuts down from 77 to 61 unique cities
+    # cuts down from 76 to 60 unique cities
     for city in cities:
         if city in word:
             return city
@@ -139,5 +147,11 @@ def main():
     print(list(df_AZ['city'].unique()))
     # and its length
     print(len(list(df_AZ['city'].unique())))
+
+
+# for verification purposes
+# def getCityFromLatAndLong(lat,lon):
+#     return gmaps.reverse_geocode((lat, lon))[0]['address_components'][2]['long_name']
+
 
 main()

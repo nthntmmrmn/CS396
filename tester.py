@@ -8,15 +8,18 @@ if not os.path.exists(path):
     raise Exception("PATH DOESN'T EXIST")
 
 df_bus = pd.read_json(path+'/business.json', lines=True)
-closed = df_bus[df_bus['is_open']==0].shape[0]
+closed = df_bus[df_bus['is_open']==0]
 closed_ids = closed['business_id'].to_numpy()
-print(f'{closed} / {df_bus.shape[0]} = {closed / df_bus.shape[0]}')
+# print(f'{closed} / {df_bus.shape[0]} = {closed / df_bus.shape[0]}')
 
 ilbus = []
-for l in open(path+"/review.json").readlines():
-	data = json.loads(l)
-	if data["business_id"] in closed_ids:
-		ilbus.append(data)
+for i, l in enumerate(open(path+"/review.json").readlines()):
+    data = json.loads(l)
+    if i == 10000:
+        break
+    if data["business_id"] in closed_ids:
+        ilbus.append(data)
+
 
 df_rev = pd.DataFrame.from_records(ilbus)
 print(df_rev['rating'].count)

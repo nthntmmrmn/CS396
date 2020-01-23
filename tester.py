@@ -22,7 +22,7 @@ for i, l in enumerate(open(path+"/review.json").readlines()):
 
 
 df_rev = pd.DataFrame.from_records(ilbus)
-print(df_rev['rating'].count)
+print(df_rev.groupby('stars')['stars'].count())
 
 # df_rev = pd.read_json(path+'/review.json', lines=True)
 # df_rev = df_rev[df_bus["v"] == closed]['rating'].count

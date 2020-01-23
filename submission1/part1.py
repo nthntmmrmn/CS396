@@ -54,7 +54,7 @@ def main():
     ##### Q5 #####
     #            #
     df_MIA = df_tip[df_tip['business_id'] == business_id] # get all tips for McCarran Intl Airport
-    dates = df_MIA['date'].dt.hour.to_numpy() # get the hour of each date of the tips for MIA
+    dates = df_MIA['date'].dt.year.to_numpy() # get the hour of each date of the tips for MIA
     values, counts = np.unique(dates, return_counts=True) # find how many tips were left at each hour
 
     print(f'Q5:{values[np.argmin(counts)]}') # print the hour that had the max # of tips
